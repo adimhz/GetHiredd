@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+    .footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #111;
+  color: #fff;
+}
+
+/* Inside left section - two small columns */
+.footer-left {
+  display: flex;
+  width: 48%;
+  gap: 70px; 
+  padding-top: 80px;
+  padding-left: 50px;
+}
+
+/* Logo and tagline stacked */
+.footer-logo-tagline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Footer links in a vertical list */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Right side with map */
+.footer-right {
+  width: 48%;
+}
+
+.footer-right iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+}
+
+/* Bottom copyright */
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #777;
+  font-size: 14px;
+}
+
+
+
+    @media (max-width: 768px) {
+      .footer-container{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      ul {
+        flex-direction: column;
+        margin-top: 10px;
+
+      }
+      .apply-section {
+        margin-top: 10px;
+      }}
+
+

@@ -1,0 +1,219 @@
+@charset "UTF-8";
+   * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background:linear-gradient(to right,#cdb7ad,#ffffff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar (reuse your previous navbar style) */
+    .navbar {
+      background: #000;
+      padding: 20px 40px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .navdiv {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo a {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    ul li a {
+      color: #f9f9f9;
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    ul li a:hover {
+      color: #ff6a6a;
+    }
+
+    .nav-profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .logout-button {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+      background-color: #d93636;
+    }
+
+    .apply-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    .apply-form {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .apply-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-button {
+      background-color: #1976d2;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #155a9c;
+    }
+    .footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #111;
+  color: #fff;
+}
+
+/* Inside left section - two small columns */
+.footer-left {
+  display: flex;
+  width: 48%;
+  gap: 70px; 
+  padding-top: 80px;
+  padding-left: 50px;
+}
+
+/* Logo and tagline stacked */
+.footer-logo-tagline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Footer links in a vertical list */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Right side with map */
+.footer-right {
+  width: 48%;
+}
+
+.footer-right iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+}
+
+/* Bottom copyright */
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #777;
+  font-size: 14px;
+}
+
+
+    @media (max-width: 768px) {
+      .profile-form-container {
+        padding: 20px;
+      }
+    }

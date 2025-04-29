@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-decoration: none;
+    }
+
+    body {
+      background:linear-gradient(to right,#cdb7ad,#ffffff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background: #1d1d1d;
+      padding: 20px 40px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .navdiv {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo a {
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    ul li a {
+      color: #f9f9f9;
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    ul li a:hover {
+      color: #ff6a6a;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .button {
+      background-color: #ff6a6a;
+      border: 1px solid #ccc;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button a {
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .about-container {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      padding: 40px 30px;
+      max-width: 900px;
+      width: 90%;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    .about-container h1 {
+      font-size: 32px;
+      color: #ffffff;
+      background-color: #1d1d1d;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .about-content h2 {
+      font-size: 24px;
+      color: #4a3f74;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .about-content ul {
+      list-style-type: disc;
+      padding-left: 40px;
+      text-align: left;
+    }
+
+    .about-content ul li {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #111;
+  color: #fff;
+}
+
+/* Inside left section - two small columns */
+.footer-left {
+  display: flex;
+  width: 48%;
+  gap: 70px; 
+  padding-top: 80px;
+  padding-left: 50px;
+}
+
+/* Logo and tagline stacked */
+.footer-logo-tagline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Footer links in a vertical list */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Right side with map */
+.footer-right {
+  width: 48%;
+}
+
+.footer-right iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+}
+
+/* Bottom copyright */
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #777;
+  font-size: 14px;
+}
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d93636;
+}
+
+    @media (max-width: 768px) {
+      .navdiv, .footer-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      ul {
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      .buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+  
