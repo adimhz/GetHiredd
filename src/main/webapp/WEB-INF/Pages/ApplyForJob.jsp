@@ -15,6 +15,7 @@
 <jsp:include page="header.jsp"/>
    <div class="apply-container">
     <form class="apply-form">
+   
       <h2>Apply for This Job</h2>
 
       <div class="form-group">
@@ -36,10 +37,11 @@
         <label for="coverletter">Cover Letter</label>
         <textarea id="coverletter" placeholder="Write your cover letter..." required></textarea>
       </div>
+       </form>
       </div>
 
       <button type="submit" class="submit-button">Submit Application</button>
-      </form>
+  
  <jsp:include page="footer.jsp"/>
 </body>
 </html>

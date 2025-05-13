@@ -1,22 +1,98 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
-<nav class="navbar">
-  <div class="navdiv">
-    <div class="logo"><a href="#">Get Hiredd</a></div>
-    <ul>
-      <li><a href="jobs">Search for job</a></li>
-      <li><a href="company">Search for company</a></li>
-      <li><a href="buildYourProfile">Build your profile</a></li>
-      <li><a href="aboutus">About Us</a></li>
-      <li><a href="contact">Contact Us</a></li>
-    </ul>
-    <div class="nav-profile">
-    <img src="${pageContext.request.contextPath}/userProfileImages/${empty sessionScope.profilePicture ? 'default.png' : sessionScope.profilePicture}" 
-     alt="User Profile" >
-          <button class="logout-button">Log Out</button>
-    </div>
-  </div>
-</nav>
-</header>
+<style>
+/* Base Navbar Styling */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+}
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/header.css" >
+.navdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Profile Styling */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+/* Logout Button */
+.logout-button {
+  color: white;
+  text-decoration: none;
+  background: #555;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+</style>
+  <nav class="navbar">
+    <div class="navdiv">
+      <div class="logo"><a href="#">Get Hiredd</a></div>
+      <ul class="nav-links">
+        <li><a href="jobs">Search for job</a></li>
+        <li><a href="company">Search for company</a></li>
+        <li><a href="buildYourProfile">Build your profile</a></li>
+        <li><a href="aboutus">About Us</a></li>
+        <li><a href="contact">Contact Us</a></li>
+      </ul>
+
+      <div class="nav-profile">
+        <div class="profile-container">
+          <img
+            src="${pageContext.request.contextPath}/resources/images/userProfileImages/${empty sessionScope.profilePicture ? 'default.jpg' : sessionScope.profilePicture}"
+            alt="Profile"
+            class="profile-img"
+            onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/images/userProfileImages/default.jpg';"
+          />
+        </div>
+        <a href="home" class="logout-button">Log Out</a>
+      </div>
+    </div>
+  </nav>
+</header>

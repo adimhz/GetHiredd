@@ -9,7 +9,7 @@
 
 body {
   line-height: 1.6;
-  background:linear-gradient(to right,#cdb7ad,#ffffff);
+  background: linear-gradient(to right, #cdb7ad, #ffffff);
 }
 
 /* Navbar */
@@ -21,8 +21,6 @@ body {
 
 .navdiv {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   max-width: 1200px;
   margin: auto;
   padding: 0 20px;
@@ -35,9 +33,15 @@ body {
   text-decoration: none;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
 .nav-links a {
   color: #fff;
-  margin-left: 20px;
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s;
@@ -45,6 +49,26 @@ body {
 
 .nav-links a:hover {
   color: #ffcc00;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.btn {
+  background-color: #ff6347;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #e04e2a;
 }
 
 /* Hero Section */
@@ -83,30 +107,12 @@ body {
 .info-section h2 {
   font-size: 36px;
   margin-bottom: 20px;
-  color: #000000; /* Changed to black */
+  color: #000;
 }
 
 .info-section p {
   font-size: 18px;
   color: #333;
-}
-
-/* Buttons */
-.btn {
-  background-color: #ff6347; /* Updated button color */
-  color: white;
-  padding: 12px 30px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background-color: #e04e2a; /* Darker hover effect */
 }
 
 /* Footer */
@@ -168,10 +174,20 @@ footer {
 @media (max-width: 768px) {
   .navdiv {
     flex-direction: column;
+    align-items: flex-start;
   }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
   .footer-container {
     flex-direction: column;
   }
+
   .footer-right iframe {
     height: 200px;
   }

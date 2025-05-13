@@ -8,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/aboutUs.css">
 </head>
-
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/AdminDashboard.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/footer.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Sidebar.css">
 <body>
 
 <jsp:include page="header.jsp"/>

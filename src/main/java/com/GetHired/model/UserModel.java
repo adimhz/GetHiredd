@@ -13,7 +13,7 @@ public class UserModel {
 	private String imageUrl;
 	
 	public UserModel(String email, String fullName, String gender, String address, String contactNo, String dateOfBirth,
-			String yearsOfExperience, String qualification, String password, String imageUrl) {
+			String yearsOfExperience, String qualification, String password, String ImageUrl) {
 		super();
 		Email = email;
 		FullName = fullName;
@@ -24,13 +24,13 @@ public class UserModel {
 		YearsOfExperience = yearsOfExperience;
 		Qualification = qualification;
 		Password = password;
-		this.imageUrl = imageUrl;
+		imageUrl = ImageUrl;
 	}
 
 
 	
 	public UserModel(String email, String fullName, String gender, String address, String contactNo, String dateOfBirth,
-			String yearsOfExperience, String qualification, String password) {
+			String yearsOfExperience, String qualification, String ImageUrl) {
 		super();
 		Email = email;
 		FullName = fullName;
@@ -40,8 +40,11 @@ public class UserModel {
 		DateOfBirth = dateOfBirth;
 		YearsOfExperience = yearsOfExperience;
 		Qualification = qualification;
-		Password = password;
+		imageUrl = ImageUrl;
 	}
+
+
+
 
 	public UserModel(String email, String password) {
 		super();

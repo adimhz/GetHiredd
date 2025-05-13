@@ -69,7 +69,7 @@ import com.GetHired.model.UserModel;
 			errorMessage = "User credential mismatch. Please try again!";
 		}
 		req.setAttribute("error", errorMessage);
-		req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(req, resp);
 	}
     	    }
      

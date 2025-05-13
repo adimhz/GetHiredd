@@ -29,6 +29,7 @@ public class loginService {
         }
 
         String query = "SELECT * FROM user WHERE Email = ?";
+        
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getEmail());
 

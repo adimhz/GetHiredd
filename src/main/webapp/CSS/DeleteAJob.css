@@ -1,0 +1,123 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  /*background: linear-gradient(to right, #cdb7ad, #ffffff);  Gradient background for the body */
+  color: #333; /* Text color for the body */
+}
+.heading{
+  text-align: center;
+  color:#111;
+}
+
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #e2b39d;
+}
+
+/* Main content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px 40px;
+  background:linear-gradient(to right, #e2b39d, #cdb7ad);
+  color: white; /* White text for content */
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+/* Form and Card Styles */
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.form-container {
+  background-color: #333; /* Slightly lighter container for forms */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width:600px;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  color: #ccc; /* Subtle light gray for labels */
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #444; /* Dark background for form fields */
+  color: white;
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #555; /* Slightly lighter border on focus */
+  background-color: #555;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #44506f; /* Simple, clean button */
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555; /* Slight hover effect */
+}

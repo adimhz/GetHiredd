@@ -1,225 +1,81 @@
-@charset "UTF-8";
-
-    * {
-      box-sizing: border-box;
+   * {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
     }
 
     body {
-      background:linear-gradient(to right,#cdb7ad,#ffffff);
+      background: linear-gradient(to right, #e2b39d, #cdb7ad); /* Main page background */
+      color: #333;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Navbar (reuse your previous navbar style) */
-    .navbar {
-      background: #000;
-      padding: 20px 40px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .navdiv {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .logo a {
-      font-size: 28px;
-      font-weight: bold;
-      color: white;
-    }
-
-    ul {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    ul li {
-      list-style: none;
-    }
-
-    ul li a {
-      color: #f9f9f9;
-      font-size: 16px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
-
-    ul li a:hover {
-      color: #ff6a6a;
-    }
-
-    .nav-profile {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .profile-pic {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #fff;
-    }
-
-    .logout-button {
-      background-color: #ff4d4d;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .logout-button:hover {
-      background-color: #d93636;
-    }
-
-    /* Main Section */
-    main {
-      flex: 1;
-      padding: 40px 20px;
+    .form-wrapper {
+      flex-grow: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 50px 0;
     }
 
-    .profile-form-container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    .form-container {
+      background-color: #222; /* Solid color background for form */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
       max-width: 600px;
-      width: 100%;
+      width: 90%;
     }
 
-    .profile-form-container h1 {
+    .form-container h2 {
       text-align: center;
-      margin-bottom: 30px;
-      color: #333;
+      margin-bottom: 20px;
+      color: white;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     label {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 5px;
       display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #555;
     }
 
     input[type="text"],
-    input[type="email"],
-    input[type="file"],
-    input[type="tel"],
     textarea {
       width: 100%;
-      padding: 10px 14px;
-      border: 1px solid #ccc;
+      padding: 10px;
+      border: 1px solid #444;
       border-radius: 8px;
-      font-size: 16px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .save-button {
-      width: 100%;
-      background-color: #1976d2;
+      background-color: #444;
       color: white;
-      padding: 12px;
+      font-size: 14px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #555;
+      background-color: #555;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #44506f;
+      color: white;
+      font-size: 14px;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-top: 20px;
     }
 
-    .save-button:hover {
-      background-color: #155a9c;
+    button:hover {
+      background-color: #555;
     }
-    .footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px;
-  background-color: #111;
-  color: #fff;
-}
-
-/* Inside left section - two small columns */
-.footer-left {
-  display: flex;
-  width: 48%;
-  gap: 70px; 
-  padding-top: 80px;
-  padding-left: 50px;
-}
-
-/* Logo and tagline stacked */
-.footer-logo-tagline {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Footer links in a vertical list */
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-links a {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer-links a:hover {
-  color: #fff;
-}
-
-/* Right side with map */
-.footer-right {
-  width: 48%;
-}
-
-.footer-right iframe {
-  width: 100%;
-  height: 250px;
-  border-radius: 10px;
-}
-
-/* Bottom copyright */
-.footer-bottom {
-  text-align: center;
-  padding: 20px;
-  background-color: #000;
-  color: #777;
-  font-size: 14px;
-}
-
-
-    @media (max-width: 768px) {
-      .profile-form-container {
-        padding: 20px;
-      }
-    }
-  
