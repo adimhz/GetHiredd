@@ -160,14 +160,7 @@
       <div class="form-group">
         <label for="experience">Years of Experience</label>
         <input type="text" id="experience" name="experience" value="${user.yearsOfExperience}" required>
-      </div>
-      <div class="form-group password-wrapper">
-        <label for="password">Password</label>
-        <div class="password-container">
-          <input type="password" id="password" name="password"  required>
-          <span class="toggle-password" onclick="togglePassword('password', this)">👁️</span>
-        </div>
-      </div>
+      </div>>
 
       <div class="form-group">
         <label for="profilePic">Upload Profile Picture</label>

@@ -7,7 +7,6 @@
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/DeleteAJob.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/footer.css">
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Sidebar.css">
 </head>
 <body>
 
@@ -46,11 +45,21 @@
               <button type="submit">Delete</button>
             </div>
           </form>
+           <% String error = (String) request.getAttribute("error");
+           if (error != null) { %>
+           <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% String success = (String) request.getAttribute("success");
+           if (success != null) { %>
+           <p style="color: green;"><%= success %></p>
+        <% } %>
         </div>
+       
       </div>
 
     </div>
   </div>
+  
 <jsp:include page="footer.jsp"/>
 
 </body>

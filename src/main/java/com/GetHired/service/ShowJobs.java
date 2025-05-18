@@ -15,7 +15,7 @@ public class ShowJobs {
 
     public List<jobModel> getAllJobs() {
         List<jobModel> jobs = new ArrayList<>();
-        String query = "SELECT j.JobTitle, j.JobType, j.JobDeadline, j.JobQualification, j.JobSalary, j.JobLocation, j.JobDescription, c.CompanyName " +
+        String query = "SELECT j.JobId,j.JobTitle, j.JobType, j.JobDeadline, j.JobQualification, j.JobSalary, j.JobLocation, j.JobDescription, c.CompanyName " +
                        "FROM Job j JOIN Company c ON j.JobCompanyId = c.CompanyId";
 
         try (Connection conn = DbConfig.getDbConnection();
@@ -24,6 +24,7 @@ public class ShowJobs {
 
             while (rs.next()) {
                 jobModel job = new jobModel();
+                job.setJobId(rs.getInt("JobId"));
                 job.setJobTitle(rs.getString("JobTitle"));
                 job.setJobType(rs.getString("JobType"));
                 job.setJobDeadline(rs.getString("JobDeadline"));
@@ -41,26 +42,15 @@ public class ShowJobs {
         return jobs;
     }
 
-    public List<jobModel> getFilteredJobs(String searchQuery, String sortBy) {
+    public List<jobModel> getFilteredJobs(String searchQuery) {
         List<jobModel> jobs = new ArrayList<>();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT j.JobTitle, j.JobType, j.JobDeadline, j.JobQualification, j.JobSalary, j.JobLocation, j.JobDescription, c.CompanyName ")
+        query.append("SELECT j.JobId,j.JobTitle, j.JobType, j.JobDeadline, j.JobQualification, j.JobSalary, j.JobLocation, j.JobDescription, c.CompanyName ")
              .append("FROM Job j JOIN Company c ON j.JobCompanyId = c.CompanyId WHERE 1=1 ");
 
         // Adding search filter if a search query is provided
         if (searchQuery != null && !searchQuery.isEmpty()) {
             query.append("AND (j.JobTitle LIKE ? OR j.JobDescription LIKE ? OR j.JobLocation LIKE ?) ");
-        }
-
-        // Adding sorting options based on sortBy parameter
-        if (sortBy != null && !sortBy.isEmpty()) {
-            if (sortBy.equals("latest")) {
-                query.append("ORDER BY j.JobDeadline DESC ");
-            } else if (sortBy.equals("salary-high-low")) {
-                query.append("ORDER BY j.JobSalary DESC ");
-            } else if (sortBy.equals("salary-low-high")) {
-                query.append("ORDER BY j.JobSalary ASC ");
-            }
         }
 
         try (Connection conn = DbConfig.getDbConnection();
@@ -76,6 +66,7 @@ public class ShowJobs {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     jobModel job = new jobModel();
+                    job.setJobId(rs.getInt("JobId"));
                     job.setJobTitle(rs.getString("JobTitle"));
                     job.setJobType(rs.getString("JobType"));
                     job.setJobDeadline(rs.getString("JobDeadline"));

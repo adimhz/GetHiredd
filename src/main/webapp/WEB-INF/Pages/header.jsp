@@ -91,7 +91,7 @@
             onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/images/userProfileImages/default.jpg';"
           />
         </div>
-        <a href="home" class="logout-button">Log Out</a>
+        <a href="logout" class="logout-button">Log Out</a>
       </div>
     </div>
   </nav>

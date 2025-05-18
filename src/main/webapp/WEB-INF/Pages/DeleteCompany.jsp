@@ -5,10 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Delete Job</title>
+<title>Delete Company</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CreateAJob.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/footer.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Sidebar.css">
 </head>
 <body>
 <div class="layout-container">
@@ -31,9 +30,9 @@
 
   <!-- Centered Form Cards -->
   <div class="card-wrapper">
-    <!-- Delete Job Form -->
+    <!-- Delete Company Form -->
     <div class="form-container">
-      <h2>Delete a Job</h2>
+      <h2>Delete a Company</h2>
       <form action="${pageContext.request.contextPath}/deletecompany" method="post">
         <div class="form-group">
           <label for="CompanyName">Company Name</label>
@@ -48,13 +47,16 @@
         </div>
       </form>
 
-      <!-- Display messages -->
-      <c:if test="${not empty success}">
-        <p style="color: green;">${success}</p>
-      </c:if>
-      <c:if test="${not empty error}">
-        <p style="color: red;">${error}</p>
-      </c:if>
+     <% String error = (String) request.getAttribute("error");
+           if (error != null) { %>
+           <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% String success = (String) request.getAttribute("success");
+           if (success != null) { %>
+           <p style="color: green;"><%= success %></p>
+        <% } %>
+        
+        
     </div>
   </div>
 

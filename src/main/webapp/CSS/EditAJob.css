@@ -21,7 +21,6 @@ body {
   background-color: #e2b39d;
 }
 
-
 /* Main content */
 .main-content {
   flex-grow: 1;
@@ -61,57 +60,65 @@ body {
 }
 
 .form-container {
-  background-color: #333; /* Slightly lighter container for forms */
+  background-color: #333; /* Matches provided theme */
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width:600px;
+  max-width: 600px;
 }
 
 .form-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: white;
+  color: white; /* Matches theme */
 }
 
 .form-group {
   margin-bottom: 15px;
 }
 
-label {
+.form-group label {
   font-size: 14px;
-  color: #ccc; /* Subtle light gray for labels */
+  color: #ccc; /* Subtle light gray from theme */
   margin-bottom: 5px;
   display: block;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-select,
-textarea {
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #444;
+  border: 1px solid #444; /* Dark border from theme */
   border-radius: 8px;
-  background-color: #444; /* Dark background for form fields */
-  color: white;
+  background-color: #444; /* Dark background from theme */
+  color: white; /* White text from theme */
   font-size: 14px;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #555; /* Slightly lighter border on focus */
-  background-color: #555;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #555; /* Lighter border on focus from theme */
+  background-color: #555; /* Lighter background on focus */
   outline: none;
 }
 
-button {
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group select,
+.form-group input[type="date"] {
+  background: #444; /* Ensure consistency with inputs */
+  cursor: pointer;
+}
+
+.form-group button {
   width: 100%;
   padding: 10px;
-  background-color: #ff6a6a; /* Simple, clean button */
+  background-color: #ff6a6a; /* Button color from theme */
   color: white;
   font-size: 14px;
   border: none;
@@ -119,8 +126,13 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #555; /* Slight hover effect */
+.form-group button:hover {
+  background-color: #555; /* Hover effect from theme */
 }
 
-
+.message {
+  color: #ff6a6a; /* Matches button color for visibility */
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+}

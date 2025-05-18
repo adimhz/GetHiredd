@@ -8,54 +8,76 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.GetHired.service.DeleteCompanyService;
+import com.GetHired.util.ValidationUtil;
 
-/**
- * Servlet implementation class DeleteCompany
- */
 @WebServlet("/deletecompany")
 public class DeleteCompany extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-      DeleteCompanyService deleteCompanyService=new DeleteCompanyService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+    private final DeleteCompanyService deleteCompanyService = new DeleteCompanyService();
+
     public DeleteCompany() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 request.getRequestDispatcher("/WEB-INF/Pages/DeleteCompany.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/Pages/DeleteCompany.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String validation = validateDeleteForm(request);
+            
+            if (validation != null) {
+                handleError(request, response, validation);
+                return;
+            }
 
-	        try {
-	            String companyName = request.getParameter("CompanyName");
-	            String companyContact = request.getParameter("CompanyContact");
+            String companyName = request.getParameter("CompanyName");
+            String companyContact = request.getParameter("CompanyContact");
 
-	            boolean isDeleted = deleteCompanyService.deleteCompany(companyName, companyContact);
+            boolean isDeleted = deleteCompanyService.deleteCompany(companyName, companyContact);
 
-	            if (isDeleted) {
-	                request.setAttribute("message", "Company deleted successfully.");
-	            } else {
-	                request.setAttribute("message", "Failed to delete company. Make sure details are correct.");
-	            }
+            if (isDeleted) {
+                handleSuccess(request, response, "Company deleted successfully.", "/WEB-INF/Pages/DeleteCompany.jsp");
+            } else {
+                handleError(request, response, "Failed to delete company. Please ensure the details are correct.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            handleError(request, response, "An unexpected error occurred. Please try again later!");
+        }
+    }
 
-	            request.getRequestDispatcher("/deleteCompany.jsp").forward(request, response);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            request.setAttribute("message", "An error occurred while processing the request.");
-	            request.getRequestDispatcher("/deleteCompany.jsp").forward(request, response);
-	        }
-	    }
+    private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
+            throws ServletException, IOException {
+        req.setAttribute("error", message);
+        req.setAttribute("CompanyName", req.getParameter("CompanyName"));
+        req.setAttribute("CompanyContact", req.getParameter("CompanyContact"));
+        req.getRequestDispatcher("/WEB-INF/Pages/DeleteCompany.jsp").forward(req, resp);
+    }
 
+    private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
+            throws ServletException, IOException {
+        req.setAttribute("success", message);
+        req.getRequestDispatcher(redirectPage).forward(req, resp);
+    }
+
+    private String validateDeleteForm(HttpServletRequest req) {
+        String companyName = req.getParameter("CompanyName");
+        String companyContact = req.getParameter("CompanyContact");
+
+        // Check for null or empty fields
+        if (ValidationUtil.isNullOrEmpty(companyName))
+            return "Company name is required.";
+        if (ValidationUtil.isNullOrEmpty(companyContact))
+            return "Company contact is required.";
+
+        // Validate field formats
+        if (!ValidationUtil.isValidPhoneNumber(companyContact))
+            return "Company contact number must be 10 digits and start with 98.";
+
+        return null;
+    }
 }

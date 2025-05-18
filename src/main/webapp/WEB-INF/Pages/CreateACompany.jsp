@@ -7,7 +7,6 @@
 <title>Creating job</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/CreateAJob.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/footer.css">
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Sidebar.css">
 </head>
 <body>
 <div class="layout-container">
@@ -48,12 +47,17 @@
               <button type="submit">Create</button>
             </div>
           </form>
+           <% String error = (String) request.getAttribute("error");
+           if (error != null) { %>
+           <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% String success = (String) request.getAttribute("success");
+           if (success != null) { %>
+           <p style="color: green;"><%= success %></p>
+        <% } %>
         </div>
       </div>
-<% String message = (String) request.getAttribute("error");
-           if (message != null) { %>
-           <p style="color: green;"><%= message %></p>
-        <% } %>
+
     </div>
     </div>
     <jsp:include page="footer.jsp"/>

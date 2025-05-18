@@ -24,29 +24,30 @@ public class CreateJobsService {
         }
     }
 
-    public Boolean createjob(jobModel job) {
+    public Boolean createJob(jobModel job) {
         if (conn == null) {
             System.out.println("Database connection is null.");
             return false;
-        } else {
-            System.out.println("Database connection is established.");
         }
-        String CompanyQuery = "SELECT CompanyId FROM company WHERE CompanyName = ?";
-        String insertQuery = "INSERT INTO Job(JobTitle,JobType,JobDeadline,JobQualification,JobCompanyId,JobSalary,JobLocation,JobDescription)"
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String companyQuery = "SELECT CompanyId FROM company WHERE CompanyName = ?";
+        String insertQuery = "INSERT INTO job(JobTitle, JobType, JobDeadline, JobQualification, JobCompanyId, JobSalary, JobLocation, JobDescription)"
+                + " VALUES (?,?,?,?,?,?,?,?)";
 
-        try (PreparedStatement CompanyStmt = conn.prepareStatement(CompanyQuery);
+        try (PreparedStatement companyStmt = conn.prepareStatement(companyQuery);
              PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
-            // Fetch company ID
-            CompanyStmt.setString(1, job.getJobCompanyId().getCompanyName());
-            ResultSet result = CompanyStmt.executeQuery();
-            int CompanyId = result.next() ? result.getInt("CompanyId") : 1;
+            companyStmt.setString(1, job.getJobCompanyId().getCompanyName());
+            ResultSet result = companyStmt.executeQuery();
+            if (!result.next()) {
+                System.err.println("Company not found: " + job.getJobCompanyId().getCompanyName());
+                return false;
+            }
+            int companyId = result.getInt("CompanyId");
 
             insertStmt.setString(1, job.getJobTitle());
             insertStmt.setString(2, job.getJobType());
             insertStmt.setDate(3, Date.valueOf(job.getJobDeadline()));
             insertStmt.setString(4, job.getJobQualification());
-            insertStmt.setInt(5, CompanyId);
+            insertStmt.setInt(5, companyId);
             insertStmt.setString(6, job.getJobSalary());
             insertStmt.setString(7, job.getJobLocation());
             insertStmt.setString(8, job.getJobDescription());
@@ -62,7 +63,7 @@ public class CreateJobsService {
     public List<jobModel> getAllJobs() {
         List<jobModel> jobs = new ArrayList<>();
         String query = "SELECT j.JobTitle, j.JobType, j.JobDeadline, j.JobSalary, j.JobLocation, j.JobDescription, c.CompanyName " +
-                       "FROM Job j JOIN company c ON j.JobCompanyId = c.CompanyId";
+                       "FROM job j JOIN company c ON j.JobCompanyId = c.CompanyId";
         try (PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -71,7 +72,7 @@ public class CreateJobsService {
                     rs.getString("JobTitle"),
                     rs.getString("JobType"),
                     rs.getDate("JobDeadline").toString(),
-                    null, // Qualification not needed for table
+                    null,
                     company,
                     rs.getString("JobSalary"),
                     rs.getString("JobLocation"),
@@ -79,6 +80,7 @@ public class CreateJobsService {
                 );
                 jobs.add(job);
             }
+            System.out.println("Fetched " + jobs.size() + " jobs");
         } catch (SQLException e) {
             System.err.println("Error fetching jobs: " + e.getMessage());
             e.printStackTrace();
@@ -86,58 +88,4 @@ public class CreateJobsService {
         return jobs;
     }
 
-    public int getJobsCount() {
-        String query = "SELECT COUNT(*) FROM Job";
-        try (PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching jobs count: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    public jobModel getHighestSalaryJob() {
-        String query = "SELECT j.JobTitle, j.JobSalary, c.CompanyName " +
-                       "FROM Job j JOIN company c ON j.JobCompanyId = c.CompanyId " +
-                       "ORDER BY CAST(j.JobSalary AS DECIMAL) DESC LIMIT 1";
-        try (PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                Company company = new Company(rs.getString("CompanyName"));
-                return new jobModel(
-                    rs.getString("JobTitle"),
-                    null, null, null, company,
-                    rs.getString("JobSalary"),
-                    null, null
-                );
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching highest salary job: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Company getCompanyWithMostJobs() {
-        String query = "SELECT c.CompanyName, COUNT(j.JobId) as jobCount " +
-                       "FROM company c LEFT JOIN Job j ON c.CompanyId = j.JobCompanyId " +
-                       "GROUP BY c.CompanyId, c.CompanyName " +
-                       "ORDER BY jobCount DESC LIMIT 1";
-        try (PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                Company company = new Company(rs.getString("CompanyName"));
-                company.setJobCount(rs.getInt("jobCount"));
-                return company;
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching company with most jobs: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

@@ -8,50 +8,72 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.GetHired.service.DeleteJobService;
+import com.GetHired.util.ValidationUtil;
 
-/**
- * Servlet implementation class DeleteAJob
- */
 @WebServlet("/deletejobs")
 public class DeleteAJob extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public DeleteAJob() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/Pages/DeleteAJob.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/Pages/DeleteAJob.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            String validation = validateDeleteForm(request);
+            
+            if (validation != null) {
+                handleError(request, response, validation);
+                return;
+            }
 
-	        String jobTitle = request.getParameter("deleteJobTitle");
-	        String companyName = request.getParameter("deleteCompany");
+            String jobTitle = request.getParameter("deleteJobTitle");
+            String companyName = request.getParameter("deleteCompany");
 
-	        DeleteJobService service = new DeleteJobService();
-	        boolean isDeleted = service.deleteJob(jobTitle, companyName);
+            DeleteJobService service = new DeleteJobService();
+            boolean isDeleted = service.deleteJob(jobTitle, companyName);
 
-	        if (isDeleted) {
-	            request.setAttribute("success", "Job deleted successfully.");
-	        } else {
-	            request.setAttribute("error", "Job not found or could not be deleted.");
-	        }
+            if (isDeleted) {
+                handleSuccess(request, response, "Job deleted successfully.", "/WEB-INF/Pages/DeleteAJob.jsp");
+            } else {
+                handleError(request, response, "Job not found or could not be deleted.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            handleError(request, response, "An unexpected error occurred. Please try again later!");
+        }
+    }
 
-	        // Redirect or forward accordingly
-	        request.getRequestDispatcher("/WEB-INF/Pages/DeleteJobResult.jsp").forward(request, response);
-	    }
+    private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
+            throws ServletException, IOException {
+        req.setAttribute("error", message);
+        req.setAttribute("deleteJobTitle", req.getParameter("deleteJobTitle"));
+        req.setAttribute("deleteCompany", req.getParameter("deleteCompany"));
+        req.getRequestDispatcher("/WEB-INF/Pages/DeleteAJob.jsp").forward(req, resp);
+    }
 
+    private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
+            throws ServletException, IOException {
+        req.setAttribute("success", message);
+        req.getRequestDispatcher(redirectPage).forward(req, resp);
+    }
+
+    private String validateDeleteForm(HttpServletRequest req) {
+        String jobTitle = req.getParameter("deleteJobTitle");
+        String companyName = req.getParameter("deleteCompany");
+
+        // Check for null or empty fields
+        if (ValidationUtil.isNullOrEmpty(jobTitle))
+            return "Job title is required.";
+        if (ValidationUtil.isNullOrEmpty(companyName))
+            return "Company name is required.";
+
+        return null;
+    }
 }

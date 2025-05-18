@@ -35,7 +35,7 @@ import com.GetHired.model.UserModel;
     	  
 
     	    if (Boolean.TRUE.equals(loginStatus)) {
-    	    	SessionUtil.setAttribute(request, "username", Email); // for consistency
+    	    	SessionUtil.setAttribute(request, "username", Email); 
     	    	UserModel fullUser = loginService.getUserDetails(Email);
                 if (fullUser != null) {
                     SessionUtil.setAttribute(request, "name", fullUser.getFullName());
@@ -45,10 +45,10 @@ import com.GetHired.model.UserModel;
     	    	if (Email.equals("Admin@gmail.com")) {
     				CookieUtil.addCookie(response, "role", "admin", 5 * 30);
     				request.setAttribute("success", "Login successful!");
-    				request.getRequestDispatcher("/WEB-INF/Pages/AdminDashboard.jsp").forward(request, response);
+    				request.getRequestDispatcher("/admin").forward(request, response);
     	    } else {
     	    	CookieUtil.addCookie(response, "role", "user", 5); 				
-    	    	request.getRequestDispatcher("/WEB-INF/Pages/SearchForJob.jsp").forward(request, response);
+    	    	request.getRequestDispatcher("/jobs").forward(request, response);
 				System.out.println("Login sucess");
 				
 			}}
